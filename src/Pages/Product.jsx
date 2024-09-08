@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import ProductCard from "../componet/ProductCard";
 import Chip from "../componet/chip";
-
 function Product() {
   const [products, setProducts] = useState([]);
   const [categories , setCategories] = useState([])
@@ -27,11 +26,14 @@ function Product() {
         setLoading(false);
       });
   }, []);
+  const [search, setSearch] = useState("")
 
+const filter = products.filter((data) => data.title.toLowerCase().includes(search.toLowerCase()))
   return (
     <div className="flex justify-center items-center">
+         
       {loading ? (
-        <h1>Loading...</h1>
+        <h1>loading...</h1>
       ) : (
         <div>
           <div className="flex flex-wrap m-4 p-3">
@@ -44,10 +46,17 @@ function Product() {
             ))
             }
           </div>
-         
+         <div>
+          <input type="text"
+          value={search}
+          placeholder="Enter Title for Seach"
+          className="border border-purple-500 rounded-md mx-40 p-4"
+          onChange={(e)=>setSearch(e.target.value)}
+          />
+         </div>
           
           <div className=" flex flex-wrap m-4">
-            {products.map((data, index) => (
+            {filter.map((data, index) => (
               <ProductCard info={data} key={index} />
             ))}
           </div>

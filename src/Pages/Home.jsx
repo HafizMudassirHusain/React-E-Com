@@ -1,15 +1,31 @@
 import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from '../firebase';
 
 const Home = () => {
-  return (
-    <div>
-     
-      <Banner />
-      <ProductShowcase />
-      <Footer />
-    </div>
-  );
+  const [user, loading, error] = useAuthState(auth);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
+  return <div>
+        <div>Welcome, {user.email}</div>
+        <Banner />
+        <ProductShowcase />
+        <Footer />
+      </div>;
 };
+
+// const Home = () => {
+//   return (
+//     <div>
+     
+//       <Banner />
+//       <ProductShowcase />
+//       <Footer />
+//     </div>
+//   );
+// };
 
 const Banner = () => {
   return (
