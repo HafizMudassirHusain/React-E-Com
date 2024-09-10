@@ -7,9 +7,8 @@ const Home = () => {
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
-
   return <div>
-        <div>Welcome, {user.email}</div>
+       
         <Banner />
         <ProductShowcase />
         <Footer />
@@ -28,9 +27,11 @@ const Home = () => {
 // };
 
 const Banner = () => {
+  const [user] = useAuthState(auth)
   return (
     <section className="bg-cover bg-center h-64 text-white" style={{ backgroundImage: 'url(https://cdn.shopify.com/s/files/1/0070/7032/files/Header_43a6fbaa-305a-4bda-8ef7-5e7f4e1278da.png?v=1694450194)' }}>
       <div className="flex items-center justify-center h-full bg-black bg-opacity-50">
+      <h1>Welcome, {user.email}</h1>
         <h2 className="text-4xl font-bold">Welcome to the Best Store</h2>
       </div>
     </section>
