@@ -1,0 +1,27 @@
+/* Dual-Ring Loader */
+.dual-ring-loader {
+  display: inline-block;
+  width: 64px;
+  height: 64px;
+}
+
+.dual-ring-loader:after {
+  content: " ";
+  display: block;
+  width: 48px;
+  height: 48px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #3498db;
+  border-color: #3498db transparent #3498db transparent;
+  animation: dual-ring-spin 1.2s linear infinite;
+}
+
+@keyframes dual-ring-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../firebase';
+import { ThemeContext } from '../Context/ThemeContext';
+import Loader from '../componet/Loader';
 
 const Home = () => {
   const [user, loading, error] = useAuthState(auth);
+  
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Loader />;
   if (error) return <p>Error: {error.message}</p>;
   return <div>
        
@@ -15,23 +18,13 @@ const Home = () => {
       </div>;
 };
 
-// const Home = () => {
-//   return (
-//     <div>
-     
-//       <Banner />
-//       <ProductShowcase />
-//       <Footer />
-//     </div>
-//   );
-// };
 
 const Banner = () => {
-  const [user] = useAuthState(auth)
+ 
   return (
     <section className="bg-cover bg-center h-64 text-white" style={{ backgroundImage: 'url(https://cdn.shopify.com/s/files/1/0070/7032/files/Header_43a6fbaa-305a-4bda-8ef7-5e7f4e1278da.png?v=1694450194)' }}>
       <div className="flex items-center justify-center h-full bg-black bg-opacity-50">
-      <h1>Welcome, {user.email}</h1>
+     
         <h2 className="text-4xl font-bold">Welcome to the Best Store</h2>
       </div>
     </section>

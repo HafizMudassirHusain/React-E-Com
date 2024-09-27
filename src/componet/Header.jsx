@@ -5,8 +5,8 @@ import { signOut } from 'firebase/auth';
 import { ThemeContext } from '../Context/ThemeContext';
 import { useAuthState } from 'react-firebase-hooks/auth'; // To get user authentication state
 
-function Header(){
-  const { theme } = useContext(ThemeContext);
+function Header() {
+  const { theme, setTheme } = useContext(ThemeContext);
   const [user] = useAuthState(auth); // Check if user is logged in
 
   const handleLogout = () => {
@@ -19,10 +19,10 @@ function Header(){
       });
   };
 
-  return(
-    <header className={`${theme === 'light' ? 'bg-gray-300 text-black' : 'bg-black text-white'} body-font`}>
+  return (
+    <header className={`${theme === 'light' ? 'bg-white text-black' : 'bg-gray-800 text-white'} body-font transition-all duration-500 ease-in-out animate-fade-in`}>
       <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-        <a className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+        <a className="flex title-font font-medium items-center mb-4 md:mb-0">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -30,7 +30,7 @@ function Header(){
             strokeLinecap="round"
             strokeLinejoin="round"
             strokeWidth={2}
-            className="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full"
+            className="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full transform transition-transform duration-300 hover:rotate-12"
             viewBox="0 0 24 24"
           >
             <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
@@ -38,16 +38,23 @@ function Header(){
           <span className="ml-3 text-xl">B-StOrE</span>
         </a>
         <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
-          <Link to="/" className="mr-5 hover:text-gray-900">Home</Link>
-          <Link to="/products" className="mr-5 hover:text-gray-900">Product</Link>
-          <Link to="/aboutus" className="mr-5 hover:text-gray-900">About Us</Link>
-          <Link to="/contactus" className="mr-5 hover:text-gray-900">Contact Us</Link>
+          <Link to="/" className="mr-5 hover:text-indigo-600 transition-colors duration-300">Home</Link>
+          <Link to="/products" className="mr-5 hover:text-indigo-600 transition-colors duration-300">Product</Link>
+          <Link to="/aboutus" className="mr-5 hover:text-indigo-600 transition-colors duration-300">About Us</Link>
+          <Link to="/contactus" className="mr-5 hover:text-indigo-600 transition-colors duration-300">Contact Us</Link>
+
+          <button 
+            onClick={() => setTheme(theme === 'light' ? "dark" : "light")}
+            className="mr-5 px-3 py-1 bg-indigo-400 text-white rounded hover:bg-indigo-600 focus:outline-none transition-colors duration-300"
+          >
+            {theme === "light" ? "Dark Mode" : "Light Mode"}
+          </button>
         </nav>
         
         {user ? (  // Show logout button if user is logged in
           <button
             onClick={handleLogout}
-            className="inline-flex items-center text-white bg-indigo-400 border-0 py-1 px-3 focus:outline-none hover:bg-gray-300 rounded text-base mt-4 md:mt-0"
+            className="inline-flex items-center text-white bg-indigo-400 border-0 py-1 px-3 focus:outline-none hover:bg-indigo-500 transition-transform duration-300 transform hover:scale-105 rounded text-base mt-4 md:mt-0"
           >
             Logout
             <svg
@@ -63,7 +70,7 @@ function Header(){
             </svg>
           </button>
         ) : (
-          <Link to="/login" className="inline-flex items-center text-white bg-indigo-400 border-0 py-1 px-3 focus:outline-none hover:bg-gray-300 rounded text-base mt-4 md:mt-0">
+          <Link to="/login" className="inline-flex items-center text-white bg-indigo-400 border-0 py-1 px-3 focus:outline-none hover:bg-indigo-500 transition-transform duration-300 transform hover:scale-105 rounded text-base mt-4 md:mt-0">
             Login
             <svg
               fill="none"

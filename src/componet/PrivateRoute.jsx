@@ -6,7 +6,7 @@ import { auth } from '../firebase';
 const PrivateRoute = ({ children }) => {
   const [user] = useAuthState(auth);
 
-  return user ? children : <Navigate to="/login" />;
+  return user ? children : <Navigate to="/" />;
 };
 
 export default PrivateRoute;
